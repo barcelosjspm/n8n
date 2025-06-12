@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: n8n-service
+    plan: free
+    env:
+      - key: WEBHOOK_URL
+        fromEnvVar: N8N_WEBHOOK
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+      - key: N8N_BASIC_AUTH_USER
+        fromEnvVar: N8N_USER
+      - key: N8N_BASIC_AUTH_PASSWORD
+        fromEnvVar: N8N_PASSWORD
+      - key: N8N_ENCRYPTION_KEY
+        fromEnvVar: N8N_KEY
+    disk:
+      mountPath: /home/node/.n8n
+      sizeGb: 1
+
+databases:
+  - name: n8n-db
+    engine: postgres
+    plan: free
